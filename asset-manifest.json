@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/EDU_AI_Platforma/static/css/main.3515017f.css",
-    "main.js": "/EDU_AI_Platforma/static/js/main.d663c3d9.js",
+    "main.css": "/EDU_AI_Platforma/static/css/main.a186b57b.css",
+    "main.js": "/EDU_AI_Platforma/static/js/main.80cf84af.js",
     "static/js/317.bb3c95e5.chunk.js": "/EDU_AI_Platforma/static/js/317.bb3c95e5.chunk.js",
     "index.html": "/EDU_AI_Platforma/index.html",
-    "main.3515017f.css.map": "/EDU_AI_Platforma/static/css/main.3515017f.css.map",
-    "main.d663c3d9.js.map": "/EDU_AI_Platforma/static/js/main.d663c3d9.js.map",
+    "main.a186b57b.css.map": "/EDU_AI_Platforma/static/css/main.a186b57b.css.map",
+    "main.80cf84af.js.map": "/EDU_AI_Platforma/static/js/main.80cf84af.js.map",
     "317.bb3c95e5.chunk.js.map": "/EDU_AI_Platforma/static/js/317.bb3c95e5.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.3515017f.css",
-    "static/js/main.d663c3d9.js"
+    "static/css/main.a186b57b.css",
+    "static/js/main.80cf84af.js"
   ]
 }
