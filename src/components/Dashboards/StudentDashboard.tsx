@@ -76,33 +76,35 @@ export const StudentDashboard: React.FC = () => {
   return (
     <div className="min-h-screen p-4">
       <div className="max-w-7xl mx-auto">
-        <div className="glass-header p-6 mb-6">
+        <div className="glass-header p-6 mb-6 animate-slide-in-glass">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-2xl font-bold text-gray-900 text-glass">Vítej zpět, {user?.name}! 👋</h1>
-              <p className="text-gray-600 text-glass">Pokračuj ve svém vzdělávacím dobrodružství</p>
+              <h1 className="text-3xl font-bold text-glass">Vítej zpět, {user?.name}! 👋</h1>
+              <p className="text-glass-light text-lg">Pokračuj ve svém vzdělávacím dobrodružství</p>
             </div>
             <div className="flex items-center space-x-4">
-              <div className="glass-button px-4 py-2">
+              <div className="glass-badge glass-badge-warning px-4 py-2">
                 <div className="flex items-center space-x-2">
-                  <span className="text-yellow-500">⭐</span>
-                  <span className="font-bold text-gray-900">{studentStats.totalXP} XP</span>
+                  <span className="text-2xl">⭐</span>
+                  <span className="font-bold text-lg">{studentStats.totalXP} XP</span>
                 </div>
               </div>
-              <div className="glass-button px-4 py-2">
+              <div className="glass-badge glass-badge-info px-4 py-2">
                 <div className="flex items-center space-x-2">
-                  <span className="text-purple-500">🏆</span>
-                  <span className="font-bold text-gray-900">Level {studentStats.level}</span>
+                  <span className="text-2xl">🏆</span>
+                  <span className="font-bold text-lg">Level {studentStats.level}</span>
                 </div>
               </div>
-              <button onClick={logout} className="glass-button px-4 py-2 text-red-600 hover:text-red-700">Odhlásit se</button>
+              <button onClick={logout} className="glass-button px-4 py-2 text-red-600 hover:text-red-700 font-medium">
+                Odhlásit se
+              </button>
             </div>
           </div>
         </div>
 
         {/* Navigation Tabs */}
         <div className="glass-card p-4 mb-6">
-          <div className="flex space-x-4">
+          <div className="flex space-x-4 flex-wrap">
             {[
               { id: 'dashboard', label: '🏠 Dashboard', icon: '🏠' },
               { id: 'chat', label: '🤖 AI Tutor Chat', icon: '🤖' },
@@ -111,10 +113,10 @@ export const StudentDashboard: React.FC = () => {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id as any)}
-                className={`px-4 py-2 rounded-lg transition-all ${
+                className={`px-6 py-3 transition-all font-medium text-lg ${
                   activeTab === tab.id 
-                    ? 'glass-card-hover bg-blue-100 text-blue-700' 
-                    : 'glass-button hover:bg-gray-100'
+                    ? 'glass-tab-active' 
+                    : 'glass-tab'
                 }`}
               >
                 {tab.label}
@@ -125,68 +127,122 @@ export const StudentDashboard: React.FC = () => {
 
         {/* Content based on active tab */}
         {activeTab === 'dashboard' && (
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+          <div className="glass-grid grid-cols-1 lg:grid-cols-4 gap-6">
             <div className="lg:col-span-1 space-y-4">
-              <div className="glass-card p-4">
-                <h3 className="font-semibold text-gray-900 text-glass mb-3">📅 Týdenní cíl</h3>
-                <div className="space-y-2">
-                  <div className="flex justify-between text-sm">
-                    <span className="text-gray-600 text-glass">Pokrok</span>
-                    <span className="text-gray-900 text-glass">{studentStats.weeklyProgress}/{studentStats.weeklyGoal} XP</span>
+              <div className="glass-grid-item">
+                <h3 className="font-bold text-glass mb-4 text-lg flex items-center">
+                  <span className="text-2xl mr-2">📅</span>
+                  Týdenní cíl
+                </h3>
+                <div className="space-y-3">
+                  <div className="flex justify-between">
+                    <span className="text-glass-muted font-medium">Pokrok</span>
+                    <span className="text-glass font-bold">{studentStats.weeklyProgress}/{studentStats.weeklyGoal} XP</span>
                   </div>
-                  <div className="w-full bg-gray-200 rounded-full h-3">
-                    <div className="bg-gradient-to-r from-blue-500 to-purple-600 h-3 rounded-full transition-all duration-500" style={{ width: `${(studentStats.weeklyProgress / studentStats.weeklyGoal) * 100}%` }} />
+                  <div className="glass-progress h-4">
+                    <div className="glass-progress-bar" style={{ width: `${(studentStats.weeklyProgress / studentStats.weeklyGoal) * 100}%` }} />
+                  </div>
+                  <div className="text-center">
+                    <span className="glass-badge glass-badge-success">
+                      {Math.round((studentStats.weeklyProgress / studentStats.weeklyGoal) * 100)}% splněno
+                    </span>
                   </div>
                 </div>
               </div>
-              <div className="glass-card p-4">
-                <h3 className="font-semibold text-gray-900 text-glass mb-3">🔥 Série</h3>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-orange-500">{studentStats.streak}</div>
-                  <div className="text-sm text-gray-600 text-glass">dní v řadě</div>
+              <div className="glass-grid-item text-center">
+                <h3 className="font-bold text-glass mb-4 text-lg flex items-center justify-center">
+                  <span className="text-2xl mr-2">🔥</span>
+                  Série
+                </h3>
+                <div className="animate-pulse-glass">
+                  <div className="text-5xl font-bold text-orange-500 mb-2">{studentStats.streak}</div>
+                  <div className="text-glass-muted font-medium">dní v řadě</div>
+                </div>
+                <div className="mt-3">
+                  <span className="glass-badge glass-badge-warning">
+                    Neuvěřitelné! 🚀
+                  </span>
                 </div>
               </div>
             </div>
 
             <div className="lg:col-span-3 space-y-6">
               <div className="glass-card p-6">
-                <h2 className="text-xl font-bold text-gray-900 text-glass mb-4">📚 Tvoje předměty</h2>
+                <h2 className="text-2xl font-bold text-glass mb-6 flex items-center">
+                  <span className="text-3xl mr-3">📚</span>
+                  Tvoje předměty
+                </h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                   {subjects.map((subject) => (
-                    <button key={subject.id} onClick={() => setActiveSubject(subject.id)} className={`glass-card-hover p-4 text-left transition-all ${activeSubject === subject.id ? 'ring-2 ring-blue-500' : ''}`}>
-                      <div className="text-2xl mb-2">{subject.icon}</div>
-                      <h3 className="font-semibold text-gray-900 text-glass">{subject.name}</h3>
-                      <p className="text-sm text-gray-600 text-glass mb-2">{subject.nextLesson}</p>
-                      <div className="w-full bg-gray-200 rounded-full h-2">
-                        <div className="bg-blue-500 h-2 rounded-full" style={{ width: `${subject.progress}%` }} />
+                    <button 
+                      key={subject.id} 
+                      onClick={() => setActiveSubject(subject.id)} 
+                      className={`glass-grid-item text-left transition-all ${
+                        activeSubject === subject.id ? 'ring-4 ring-blue-400 bg-blue-50' : ''
+                      }`}
+                    >
+                      <div className="text-4xl mb-3 text-center">{subject.icon}</div>
+                      <h3 className="font-bold text-glass text-lg mb-2">{subject.name}</h3>
+                      <p className="text-sm text-glass-muted mb-3 font-medium">{subject.nextLesson}</p>
+                      <div className="glass-progress h-3 mb-2">
+                        <div className="glass-progress-bar" style={{ width: `${subject.progress}%` }} />
                       </div>
-                      <p className="text-xs text-gray-500 text-glass mt-1">{subject.completedLessons}/{subject.totalLessons} lekcí</p>
+                      <div className="flex justify-between items-center">
+                        <span className="text-xs text-glass-muted font-medium">{subject.completedLessons}/{subject.totalLessons} lekcí</span>
+                        <span className="glass-badge glass-badge-info text-xs">{subject.progress}%</span>
+                      </div>
                     </button>
                   ))}
                 </div>
               </div>
 
               <div className="glass-card p-6">
-                <h2 className="text-xl font-bold text-gray-900 text-glass mb-4">🎮 Herní režimy pro {subjects.find(s => s.id === activeSubject)?.name}</h2>
+                <h2 className="text-2xl font-bold text-glass mb-6 flex items-center">
+                  <span className="text-3xl mr-3">🎮</span>
+                  Herní režimy pro {subjects.find(s => s.id === activeSubject)?.name}
+                </h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                   {gameModes.filter(mode => mode.subjects.includes(activeSubject)).map((mode) => (
-                    <div key={mode.id} className={`glass-card-hover p-4 transition-all ${!mode.isUnlocked ? 'opacity-60' : 'cursor-pointer'}`} onClick={() => startGameMode(mode)}>
-                      <div className="flex items-start justify-between mb-3">
-                        <div className="text-3xl">{mode.icon}</div>
-                        <div className="flex items-center space-x-2">
-                          <span className={`px-2 py-1 rounded-full text-xs font-medium ${getDifficultyColor(mode.difficulty)}`}>{getDifficultyText(mode.difficulty)}</span>
-                          {!mode.isUnlocked && <span className="text-gray-400">🔒</span>}
+                    <div 
+                      key={mode.id} 
+                      className={`glass-grid-item transition-all ${
+                        !mode.isUnlocked ? 'opacity-70' : 'cursor-pointer hover:scale-105'
+                      }`} 
+                      onClick={() => startGameMode(mode)}
+                    >
+                      <div className="flex items-start justify-between mb-4">
+                        <div className="text-5xl">{mode.icon}</div>
+                        <div className="flex flex-col items-end space-y-2">
+                          <span className={`glass-badge ${getDifficultyColor(mode.difficulty).includes('blue') ? 'glass-badge-info' : 
+                            getDifficultyColor(mode.difficulty).includes('yellow') ? 'glass-badge-warning' : 'glass-badge-error'}`}>
+                            {getDifficultyText(mode.difficulty)}
+                          </span>
+                          {!mode.isUnlocked && <span className="text-3xl opacity-50">🔒</span>}
                         </div>
                       </div>
-                      <h3 className="font-semibold text-gray-900 text-glass mb-2">{mode.name}</h3>
-                      <p className="text-sm text-gray-600 text-glass mb-3">{mode.description}</p>
-                      <div className="flex items-center justify-between text-xs text-gray-500 text-glass mb-2">
-                        <span>⏱️ {mode.estimatedTime} min</span>
-                        {mode.isUnlocked && <span>📈 {mode.progress}%</span>}
+                      <h3 className="font-bold text-glass text-lg mb-3">{mode.name}</h3>
+                      <p className="text-sm text-glass-muted mb-4 leading-relaxed">{mode.description}</p>
+                      <div className="flex items-center justify-between mb-3">
+                        <div className="flex items-center space-x-1">
+                          <span className="text-lg">⏱️</span>
+                          <span className="text-sm text-glass-muted font-medium">{mode.estimatedTime} min</span>
+                        </div>
+                        {mode.isUnlocked && (
+                          <span className="glass-badge glass-badge-success text-xs">
+                            📈 {mode.progress}%
+                          </span>
+                        )}
                       </div>
                       {mode.isUnlocked && mode.progress !== undefined && mode.progress > 0 && (
-                        <div className="w-full bg-gray-200 rounded-full h-1">
-                          <div className="bg-green-500 h-1 rounded-full" style={{ width: `${mode.progress}%` }} />
+                        <div className="glass-progress h-2">
+                          <div className="glass-progress-bar" style={{ width: `${mode.progress}%` }} />
+                        </div>
+                      )}
+                      {!mode.isUnlocked && (
+                        <div className="text-center mt-3">
+                          <span className="glass-badge glass-badge-warning text-xs">
+                            Dokončete více lekcí k odemčení
+                          </span>
                         </div>
                       )}
                     </div>

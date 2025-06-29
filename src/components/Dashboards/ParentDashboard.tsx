@@ -272,21 +272,21 @@ export const ParentDashboard: React.FC = () => {
   return (
     <div className="min-h-screen p-4">
       <div className="max-w-7xl mx-auto">
-        <div className="glass-header p-6 mb-6">
+        <div className="glass-header p-6 mb-6 animate-slide-in-glass">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-2xl font-bold text-gray-900 text-glass">
+              <h1 className="text-3xl font-bold text-glass">
                 Rodičovský přehled - {user?.name} 👨‍👩‍👧‍👦
               </h1>
-              <p className="text-gray-600 text-glass">
+              <p className="text-glass-light text-lg">
                 Detailní sledování pokroku a doporučení pro {selectedChildData.name}
               </p>
             </div>
             <div className="flex items-center space-x-4">
-              <div className="glass-button px-4 py-2">
-                <span className="text-green-600">✅ {stats.accuracy.toFixed(1)}% úspěšnost</span>
+              <div className="glass-badge glass-badge-success px-4 py-2">
+                <span className="font-bold">✅ {stats.accuracy.toFixed(1)}% úspěšnost</span>
               </div>
-              <button onClick={logout} className="glass-button px-4 py-2 text-red-600 hover:text-red-700">
+              <button onClick={logout} className="glass-button px-4 py-2 text-red-600 hover:text-red-700 font-medium">
                 Odhlásit se
               </button>
             </div>
@@ -314,10 +314,10 @@ export const ParentDashboard: React.FC = () => {
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id as any)}
-                  className={`px-4 py-2 rounded-lg transition-all ${
+                  className={`px-6 py-3 transition-all font-medium text-lg ${
                     activeTab === tab.id 
-                      ? 'glass-card-hover bg-blue-100 text-blue-700' 
-                      : 'glass-button hover:bg-gray-100'
+                      ? 'glass-tab-active' 
+                      : 'glass-tab'
                   }`}
                 >
                   {tab.label}

@@ -88,20 +88,22 @@ export const TeacherDashboard: React.FC = () => {
   return (
     <div className="min-h-screen p-4">
       <div className="max-w-7xl mx-auto">
-        <div className="glass-header p-6 mb-6">
+        <div className="glass-header p-6 mb-6 animate-slide-in-glass">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-2xl font-bold text-gray-900 text-glass">Učitelský dashboard - {user?.name} 👨‍🏫</h1>
-              <p className="text-gray-600 text-glass">Správa tříd, osnov a AI-powered vzdělávací obsah</p>
+              <h1 className="text-3xl font-bold text-glass">Učitelský dashboard - {user?.name} 👨‍🏫</h1>
+              <p className="text-glass-light text-lg">Správa tříd, osnov a AI-powered vzdělávací obsah</p>
             </div>
             <div className="flex items-center space-x-4">
-              <div className="glass-button px-4 py-2">
-                <span className="text-blue-600">📚 {subjects.length} předmětů</span>
+              <div className="glass-badge glass-badge-info px-4 py-2">
+                <span className="font-bold">📚 {subjects.length} předmětů</span>
               </div>
-              <div className="glass-button px-4 py-2">
-                <span className="text-green-600">👥 {subjects.reduce((sum, s) => sum + s.studentsCount, 0)} studentů</span>
+              <div className="glass-badge glass-badge-success px-4 py-2">
+                <span className="font-bold">👥 {subjects.reduce((sum, s) => sum + s.studentsCount, 0)} studentů</span>
               </div>
-              <button onClick={logout} className="glass-button px-4 py-2 text-red-600 hover:text-red-700">Odhlásit se</button>
+              <button onClick={logout} className="glass-button px-4 py-2 text-red-600 hover:text-red-700 font-medium">
+                Odhlásit se
+              </button>
             </div>
           </div>
         </div>
@@ -119,10 +121,10 @@ export const TeacherDashboard: React.FC = () => {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id as any)}
-                className={`px-4 py-2 rounded-lg transition-all ${
+                className={`px-6 py-3 transition-all font-medium text-lg ${
                   activeTab === tab.id 
-                    ? 'glass-card-hover bg-blue-100 text-blue-700' 
-                    : 'glass-button hover:bg-gray-100'
+                    ? 'glass-tab-active' 
+                    : 'glass-tab'
                 }`}
               >
                 {tab.label}

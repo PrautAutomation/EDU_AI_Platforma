@@ -27,39 +27,39 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onLogin, isLoading, error 
   ];
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4">
+    <div className="min-h-screen flex items-center justify-center p-4 animate-slide-in-glass">
       <div className="glass-card w-full max-w-md p-8">
         {/* Header */}
         <div className="text-center mb-8">
-          <div className="text-4xl mb-4">🎓</div>
-          <h1 className="text-2xl font-bold text-gray-900 text-glass mb-2">
+          <div className="text-6xl mb-4 animate-pulse-glass">🎓</div>
+          <h1 className="text-3xl font-bold text-glass mb-2">
             EDU-AI Platform
           </h1>
-          <p className="text-gray-600 text-glass">
+          <p className="text-glass-light text-lg">
             Inteligentní systém pro vzdělávání
           </p>
         </div>
 
         {/* Error Message */}
         {error && (
-          <div className="glass-card mb-4 p-3 border-red-200 bg-red-50">
-            <p className="text-red-600 text-sm text-center">{error}</p>
+          <div className="glass-badge glass-badge-error mb-4 p-3 w-full text-center">
+            <p className="text-sm font-medium">{error}</p>
           </div>
         )}
 
         {/* Role Selection */}
         <div className="mb-6">
-          <label className="block text-sm font-medium text-gray-700 text-glass mb-3">
+          <label className="block text-sm font-semibold text-glass mb-4">
             Vyberte svou roli:
           </label>
-          <div className="space-y-2">
+          <div className="space-y-3">
             {roles.map((role) => (
               <label
                 key={role.value}
-                className={`flex items-center p-3 rounded-lg cursor-pointer transition-all ${
+                className={`flex items-center p-4 rounded-lg cursor-pointer transition-all ${
                   selectedRole === role.value
-                    ? 'glass-card-hover bg-blue-50 border-blue-200'
-                    : 'glass-button hover:bg-gray-50'
+                    ? 'glass-tab-active border-2'
+                    : 'glass-tab'
                 }`}
               >
                 <input
@@ -71,15 +71,15 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onLogin, isLoading, error 
                   className="sr-only"
                 />
                 <div className="flex-1">
-                  <div className="font-medium text-gray-900 text-glass">
+                  <div className="font-semibold text-glass text-lg">
                     {role.label}
                   </div>
-                  <div className="text-sm text-gray-600 text-glass">
+                  <div className="text-sm text-glass-muted mt-1">
                     {role.description}
                   </div>
                 </div>
                 {selectedRole === role.value && (
-                  <div className="text-blue-500">✓</div>
+                  <div className="text-2xl text-blue-600 ml-3">✓</div>
                 )}
               </label>
             ))}
@@ -87,26 +87,26 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onLogin, isLoading, error 
         </div>
 
         {/* Login Form */}
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-5">
           {/* Email */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 text-glass mb-1">
-              Email
+            <label className="block text-sm font-semibold text-glass mb-2">
+              📧 Email
             </label>
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="w-full glass-button px-3 py-2 border-0 focus:ring-2 focus:ring-blue-500 focus:outline-none text-gray-900"
+              className="w-full glass-button px-4 py-3 text-lg font-medium"
               placeholder="vase@email.cz"
             />
           </div>
 
           {/* Password */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 text-glass mb-1">
-              Heslo
+            <label className="block text-sm font-semibold text-glass mb-2">
+              🔐 Heslo
             </label>
             <div className="relative">
               <input
@@ -114,15 +114,15 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onLogin, isLoading, error 
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                className="w-full glass-button px-3 py-2 pr-10 border-0 focus:ring-2 focus:ring-blue-500 focus:outline-none text-gray-900"
+                className="w-full glass-button px-4 py-3 pr-12 text-lg font-medium"
                 placeholder="••••••••"
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute inset-y-0 right-0 px-3 flex items-center text-gray-500 hover:text-gray-700"
+                className="absolute inset-y-0 right-0 px-4 flex items-center text-glass hover:text-glass-light transition-colors"
               >
-                {showPassword ? '👁️' : '👁️‍🗨️'}
+                <span className="text-xl">{showPassword ? '👁️' : '🙈'}</span>
               </button>
             </div>
           </div>
@@ -131,37 +131,48 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onLogin, isLoading, error 
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full glass-card-hover py-3 px-4 text-white font-medium bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+            className="w-full py-4 px-6 text-white font-bold text-lg bg-gradient-to-r from-blue-500 via-cyan-500 to-blue-600 hover:from-blue-600 hover:via-cyan-600 hover:to-blue-700 glass-card-hover shadow-xl disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300"
           >
             {isLoading ? (
               <div className="flex items-center justify-center">
-                <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
-                Přihlašování...
+                <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-white mr-3"></div>
+                <span>Přihlašování...</span>
               </div>
             ) : (
-              `Přihlásit se jako ${roles.find(r => r.value === selectedRole)?.label}`
+              <span className="flex items-center justify-center">
+                <span className="mr-2">🚀</span>
+                {`Přihlásit se jako ${roles.find(r => r.value === selectedRole)?.label}`}
+              </span>
             )}
           </button>
         </form>
 
         {/* Demo Credentials */}
-        <div className="mt-6 glass-card p-4">
-          <h3 className="text-sm font-medium text-gray-700 text-glass mb-2">
+        <div className="mt-8 glass-card p-5">
+          <h3 className="text-sm font-bold text-glass mb-4 flex items-center">
+            <span className="mr-2">🎯</span>
             Demo přístupy:
           </h3>
-          <div className="text-xs text-gray-600 text-glass space-y-1">
-            <div>👨‍🏫 Učitel: ucitel@demo.cz / heslo123</div>
-            <div>🎓 Student: student@demo.cz / heslo123</div>
-            <div>👨‍👩‍👧‍👦 Rodič: rodic@demo.cz / heslo123</div>
-            <div>🧠 Psycholog: psycholog@demo.cz / heslo123</div>
-            <div>⚙️ Admin: admin@demo.cz / heslo123</div>
+          <div className="grid grid-cols-1 gap-2 text-sm text-glass-muted">
+            <div className="glass-button p-2 text-center font-medium">👨‍🏫 Učitel: <span className="text-glass font-semibold">ucitel@demo.cz</span></div>
+            <div className="glass-button p-2 text-center font-medium">🎓 Student: <span className="text-glass font-semibold">student@demo.cz</span></div>
+            <div className="glass-button p-2 text-center font-medium">👨‍👩‍👧‍👦 Rodič: <span className="text-glass font-semibold">rodic@demo.cz</span></div>
+            <div className="glass-button p-2 text-center font-medium">🧠 Psycholog: <span className="text-glass font-semibold">psycholog@demo.cz</span></div>
+            <div className="glass-button p-2 text-center font-medium">⚙️ Admin: <span className="text-glass font-semibold">admin@demo.cz</span></div>
+            <div className="text-center mt-2 text-xs text-glass-muted">
+              <span className="glass-badge">Všechna hesla: <strong>heslo123</strong></span>
+            </div>
           </div>
         </div>
 
         {/* Footer */}
-        <div className="mt-6 text-center text-xs text-gray-500 text-glass">
-          <p>EDU-AI Platform v1.0</p>
-          <p>Lokální AI • Kompletně offline</p>
+        <div className="mt-6 text-center">
+          <div className="glass-badge glass-badge-info">
+            <span className="font-bold">EDU-AI Platform v1.0</span>
+          </div>
+          <p className="mt-2 text-xs text-glass-muted font-medium">
+            🔒 Lokální AI • 🌐 Kompletně offline • 🎯 Bezpečné
+          </p>
         </div>
       </div>
     </div>
