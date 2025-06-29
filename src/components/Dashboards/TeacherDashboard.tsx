@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import { VectorLLMChat } from '../Chat/VectorLLMChat';
+import { ThemeToggle } from '../Theme/ThemeToggle';
 
 interface Subject {
   id: string;
@@ -101,6 +102,7 @@ export const TeacherDashboard: React.FC = () => {
               <div className="glass-badge glass-badge-success px-4 py-2">
                 <span className="font-bold">👥 {subjects.reduce((sum, s) => sum + s.studentsCount, 0)} studentů</span>
               </div>
+              <ThemeToggle />
               <button onClick={logout} className="glass-button px-4 py-2 text-red-600 hover:text-red-700 font-medium">
                 Odhlásit se
               </button>

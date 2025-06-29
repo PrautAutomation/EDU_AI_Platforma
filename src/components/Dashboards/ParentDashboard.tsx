@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
+import { ThemeToggle } from '../Theme/ThemeToggle';
 
 interface StudentResponse {
   id: string;
@@ -286,6 +287,7 @@ export const ParentDashboard: React.FC = () => {
               <div className="glass-badge glass-badge-success px-4 py-2">
                 <span className="font-bold">✅ {stats.accuracy.toFixed(1)}% úspěšnost</span>
               </div>
+              <ThemeToggle />
               <button onClick={logout} className="glass-button px-4 py-2 text-red-600 hover:text-red-700 font-medium">
                 Odhlásit se
               </button>

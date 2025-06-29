@@ -139,7 +139,12 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onLogin, isLoading, error 
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full py-4 px-6 text-white font-bold text-lg bg-gradient-to-r from-blue-500 via-cyan-500 to-blue-600 hover:from-blue-600 hover:via-cyan-600 hover:to-blue-700 glass-card-hover shadow-xl disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300"
+            className="w-full py-4 px-6 font-bold text-lg rounded-xl shadow-xl disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 border-2 border-transparent
+              bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800 
+              hover:from-blue-700 hover:via-blue-800 hover:to-blue-900 
+              text-white hover:text-white focus:text-white
+              hover:shadow-2xl hover:scale-105 active:scale-95
+              focus:outline-none focus:ring-4 focus:ring-blue-300"
           >
             {isLoading ? (
               <div className="flex items-center justify-center">

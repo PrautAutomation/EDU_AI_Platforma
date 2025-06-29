@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import { VectorLLMChat } from '../Chat/VectorLLMChat';
 import { CharacterCustomization } from '../Character/CharacterCustomization';
+import { ThemeToggle } from '../Theme/ThemeToggle';
 
 interface GameMode {
   id: string;
@@ -95,6 +96,7 @@ export const StudentDashboard: React.FC = () => {
                   <span className="font-bold text-lg">Level {studentStats.level}</span>
                 </div>
               </div>
+              <ThemeToggle />
               <button onClick={logout} className="glass-button px-4 py-2 text-red-600 hover:text-red-700 font-medium">
                 Odhlásit se
               </button>

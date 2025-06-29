@@ -5,10 +5,12 @@ import i18n from './i18n';
 
 // Import components
 import { AuthProvider, useAuth } from './contexts/AuthContext';
+import { ThemeProvider } from './contexts/ThemeContext';
 import { LoginForm } from './components/Auth/LoginForm';
 import { StudentDashboard } from './components/Dashboards/StudentDashboard';
 import { TeacherDashboard } from './components/Dashboards/TeacherDashboard';
 import { ParentDashboard } from './components/Dashboards/ParentDashboard';
+import { ThemeToggle } from './components/Theme/ThemeToggle';
 // import { LanguageSelector } from './components/LanguageSelector';
 import { useTranslation } from './hooks/useTranslation';
 import { UserRole } from './types';
@@ -59,9 +61,12 @@ const AppContent: React.FC = () => {
                   </h1>
                   <p className="text-gray-600 text-glass">Analýza učebních stylů a doporučení</p>
                 </div>
-                <button onClick={logout} className="glass-button px-4 py-2 text-red-600">
-                  Odhlásit se
-                </button>
+                <div className="flex items-center space-x-4">
+                  <ThemeToggle />
+                  <button onClick={logout} className="glass-button px-4 py-2 text-red-600">
+                    Odhlásit se
+                  </button>
+                </div>
               </div>
             </div>
             
@@ -85,9 +90,12 @@ const AppContent: React.FC = () => {
                   </h1>
                   <p className="text-gray-600 text-glass">Správa celé EDU-AI platformy</p>
                 </div>
-                <button onClick={logout} className="glass-button px-4 py-2 text-red-600">
-                  Odhlásit se
-                </button>
+                <div className="flex items-center space-x-4">
+                  <ThemeToggle />
+                  <button onClick={logout} className="glass-button px-4 py-2 text-red-600">
+                    Odhlásit se
+                  </button>
+                </div>
               </div>
             </div>
             
@@ -128,15 +136,17 @@ const AppContent: React.FC = () => {
 const App: React.FC = () => {
   return (
     <I18nextProvider i18n={i18n}>
-      <AuthProvider>
-        <Suspense fallback={<LoadingSpinner />}>
-          <Router>
-            <Routes>
-              <Route path="*" element={<AppContent />} />
-            </Routes>
-          </Router>
-        </Suspense>
-      </AuthProvider>
+      <ThemeProvider>
+        <AuthProvider>
+          <Suspense fallback={<LoadingSpinner />}>
+            <Router>
+              <Routes>
+                <Route path="*" element={<AppContent />} />
+              </Routes>
+            </Router>
+          </Suspense>
+        </AuthProvider>
+      </ThemeProvider>
     </I18nextProvider>
   );
 };
