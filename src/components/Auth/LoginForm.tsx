@@ -28,7 +28,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onLogin, isLoading, error 
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4 animate-slide-in-glass">
-      <div className="glass-card w-full max-w-md p-8">
+      <div className="glass-card w-full max-w-lg p-8">
         {/* Header */}
         <div className="text-center mb-8">
           <div className="text-6xl mb-4 animate-pulse-glass">🎓</div>
@@ -52,37 +52,45 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onLogin, isLoading, error 
           <label className="block text-sm font-semibold text-glass mb-4">
             Vyberte svou roli:
           </label>
-          <div className="space-y-3">
+          
+          {/* Tab Navigation */}
+          <div className="flex flex-wrap gap-3 mb-6 justify-center">
             {roles.map((role) => (
-              <label
+              <button
                 key={role.value}
-                className={`flex items-center p-4 rounded-lg cursor-pointer transition-all ${
+                type="button"
+                onClick={() => setSelectedRole(role.value)}
+                className={`transition-all ${
                   selectedRole === role.value
-                    ? 'glass-tab-active border-2'
-                    : 'glass-tab'
+                    ? 'login-tab-active'
+                    : 'login-tab'
                 }`}
               >
-                <input
-                  type="radio"
-                  name="role"
-                  value={role.value}
-                  checked={selectedRole === role.value}
-                  onChange={(e) => setSelectedRole(e.target.value as UserRole)}
-                  className="sr-only"
-                />
-                <div className="flex-1">
-                  <div className="font-semibold text-glass text-lg">
-                    {role.label}
-                  </div>
-                  <div className="text-sm text-glass-muted mt-1">
-                    {role.description}
-                  </div>
+                <div className="text-lg mb-1">{role.label.split(' ')[0]}</div>
+                <div className="text-xs font-medium hidden sm:block">
+                  {role.label.split(' ').slice(1).join(' ')}
                 </div>
-                {selectedRole === role.value && (
-                  <div className="text-2xl text-blue-600 ml-3">✓</div>
-                )}
-              </label>
+              </button>
             ))}
+          </div>
+          
+          {/* Selected Role Details */}
+          <div className="glass-card p-6 text-center border-2 border-blue-200 animate-slide-in-glass">
+            <div className="text-5xl mb-3 animate-pulse-glass">
+              {roles.find(r => r.value === selectedRole)?.label.split(' ')[0]}
+            </div>
+            <h3 className="font-bold text-glass text-xl mb-3">
+              {roles.find(r => r.value === selectedRole)?.label}
+            </h3>
+            <p className="text-glass-muted text-base leading-relaxed mb-4">
+              {roles.find(r => r.value === selectedRole)?.description}
+            </p>
+            <div className="flex justify-center">
+              <span className="glass-badge glass-badge-success px-4 py-2">
+                <span className="mr-2 text-lg">✓</span>
+                <span className="font-semibold">Vybraná role</span>
+              </span>
+            </div>
           </div>
         </div>
 
