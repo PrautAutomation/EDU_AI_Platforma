@@ -1,6 +1,6 @@
 # Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was bootstrapped with [Open Plartform](https://prautautomation.github.io/EDU_AI_Platforma/).
 
 ## Available Scripts
 
